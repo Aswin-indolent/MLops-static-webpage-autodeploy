@@ -1,0 +1,29 @@
+
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - python --version
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+
+  build:
+    commands:
+      - echo "Training the Iris ML model..."
+      - python model.py
+      - echo "Checking generated model..."
+      - test -f iris_model.joblib
+      - echo "ML model created successfully."
+
+artifacts:
+  files:
+    - app.py
+    - model.py
+    - requirements.txt
+    - iris_model.joblib
+    - appspec.yml
+    - scripts/**/*
+  discard-paths: no
